@@ -63,11 +63,23 @@ extern const uint8_t mqtt_eclipseprojects_io_pem_end[]   asm("_binary_mqtt_eclip
  * @param event_id The id for the received event.
  * @param event_data The data for the event, esp_mqtt_event_handle_t.
  */
+void IntArrayToString()
+{
+    strcpy(str, "Device-2 ledsiz Data:");
+    for (int i = 1; i <= 20; i++) {
+        char temp[6];
+        sprintf(temp, "%d", buffer[i]);
+        strcat(str, temp);
+        if (i < 20) strcat(str, ",");
+    }
+}
+/*
 void IntArrayToString() 
 {
     sprintf(str,"Device-2 ledsiz Data:%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d",buffer[1],buffer[2],buffer[3],buffer[4],buffer[5],buffer[6],buffer[7],buffer[8],buffer[9],buffer[10]
     ,buffer[11],buffer[12],buffer[13],buffer[14],buffer[15],buffer[16],buffer[17],buffer[18],buffer[19],buffer[20]); 
 }
+*/
 static void wifi_event_handler(void *event_handler_arg, esp_event_base_t event_base, int32_t event_id, void *event_data)
 {
     switch (event_id)
